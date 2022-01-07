@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FolderPage implements OnInit {
   public folder: string;
+  //weatehrItemcomponent instance or reference
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
