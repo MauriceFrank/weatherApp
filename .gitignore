@@ -11,8 +11,9 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-*.angular/cache/*
 
+/.angular/cache
+.angular/cache*
 .idea/
 .ionic/
 .sourcemaps/
