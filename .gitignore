@@ -12,7 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
-/.angular/cache*
+
 .idea/
 .ionic/
 .sourcemaps/
@@ -43,4 +43,7 @@ cypress/support/commands.js
 cypress/support/index.js
 cypress/videos/examples/actions.spec.js.mp4
 cypress-e2e/cypress/fixtures/example.json
+
+#misc
+/.angular/cache
 
