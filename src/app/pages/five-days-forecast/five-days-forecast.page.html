@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="fiveDayForecast.length>0"
+      >{{fiveDayForecast[0].cityName}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-accordion-group>
+      <ion-accordion
+        toggle-icon="arrow-down-circle"
+        *ngFor="let forecastItem of fiveDayForecast"
+      >
+        <ion-item slot="header">
+          <ion-avatar slot="start">
+            <img [src]="getWeatherIcon(forecastItem.iconID)" />
+          </ion-avatar>
+          <ion-label color="primary"
+            >{{getDay(forecastItem) | date: 'EE, MMM d'}} |
+            {{forecastItem.temperature | number : '1.0-0'}}{{temperatureUnit}}
+          </ion-label>
+        </ion-item>
+        <ion-list slot="content">
+          <ion-item>
+            <ion-label>
+              <ion-badge color="secondary"
+                >{{forecastItem.description}}</ion-badge
+              >
+              <ion-row
+                ><ion-badge color="primary"
+                  >{{humidityLabelText}} | {{forecastItem.humidity | number :
+                  '1.0-0'}} {{humidityUnit}}</ion-badge
+                >
+                &nbsp;
+                <ion-badge color="primary"
+                  >{{windLabelText}} | {{forecastItem.wind | number : '1.0-0'}}
+                  {{windUnit}}</ion-badge
+                ></ion-row
+              >
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card>
+</ion-content>

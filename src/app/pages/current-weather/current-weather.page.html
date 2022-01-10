@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{pageInformationService.appPages[0].title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <button
+      *ngIf="value || currentGeolocation"
+      ion-button
+      icon-only
+      (click)="getCityWeatherData()"
+    >
+      <ion-icon slot="end" color="primary" name="search"></ion-icon>
+    </button>
+    <ion-item>
+      <ion-label position="stacked">{{cityLabelText}}</ion-label>
+
+      <ion-input
+        [disabled]="currentGeolocation"
+        [placeholder]="placeholderText"
+        clearInput
+        [(ngModel)]="value"
+        (keydown.enter)="getCityWeatherData()"
+      ></ion-input>
+
+      <!--   <ion-icon
+        *ngIf="value || currentGeolocation"
+        color="primary"
+        name="search"
+        slot="end"
+      ></ion-icon> -->
+    </ion-item>
+    <div *ngIf="!weatherItem.isEmpty">
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img [src]="getWeatherIcon(weatherItem.iconID)" />
+          </ion-avatar>
+          <ion-label>
+            <ion-card-subtitle color="primary"
+              >{{currentDateLabelText}}</ion-card-subtitle
+            >
+            <ion-card-title
+              >{{weatherItem.temperature | number : '1.0-0'}}{{temperatureUnit}}
+              | {{weatherItem.description}}</ion-card-title
+            >
+
+            <ion-card-subtitle
+              >{{weatherItem.cityName}}, {{weatherItem.countryCode}} - {{
+              getDateOfCity() | date: 'MMM d, y, h:mm a'}}</ion-card-subtitle
+            >
+            <ion-card-subtitle
+              ><ion-badge color="primary"
+                >{{humidityLabelText}} | {{weatherItem.humidity | number :
+                '1.0-0'}} {{humidityUnit}}</ion-badge
+              >
+              &nbsp;
+              <ion-badge color="primary"
+                >{{windLabelText}} | {{weatherItem.wind | number : '1.0-0'}}
+                {{windUnit}}</ion-badge
+              ></ion-card-subtitle
+            >
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
+      <img class="full-image" [src]="cityImagePath" />
+    </div>
+  </ion-card>
+</ion-content>
