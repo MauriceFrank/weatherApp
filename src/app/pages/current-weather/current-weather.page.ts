@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { WeatherItem } from 'src/app/pages/current-weather/weather-item';
 import { WeatherDataService } from 'src/app/services/weather-data.service';
 import { PageInformationService } from 'src/app/services/page-information.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @Component({
   selector: 'app-current-weather',
@@ -40,6 +41,8 @@ export class CurrentWeatherPage implements OnInit {
   weatherItemSub: Subscription = new Subscription();
   currentGeolocationSub: Subscription = new Subscription();
 
+  private geolocation: Geolocation = new Geolocation();
+
   constructor(
     private _weatherDataService: WeatherDataService,
     public pageInformationService: PageInformationService
@@ -70,7 +73,7 @@ export class CurrentWeatherPage implements OnInit {
   }
 
   getCurrentLocationWeatherData(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
+    this.geolocation.getCurrentPosition().then((position) => {
       this._weatherDataService.getCurrentWeatherDataLocation(
         position.coords.latitude,
         position.coords.longitude
